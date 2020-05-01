@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Practice Graph</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://d3js.org/d3.v5.js"></script>
+  </head>
+  <body>
+    <h1>Corona Virus April 2020</h1>
+    <div class="buttons">
+      <button id="cases-button">Cases</button>
+      <button id="deaths-button">Deaths</button>
+    </div>
+    <svg width="1100" height="500"></svg>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Cases</th>
+          <th>Deaths</th>
+        </tr>
+      </thead>
+      <tbody id="tableData"></tbody>
+    </table>
+    <script src="app.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+body {
+  margin: 0px;
+  /* overflow: hidden; */
+  background-color: #6d6d6d;
+  font-family: arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+.buttons {
+  margin: 30px 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+button {
+  padding: 2px 10px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+}
+
+#cases-button {
+  color: rgb(221, 131, 34);
+}
+
+#deaths-button {
+  color: rgb(221, 34, 34);
+}
+
+svg {
+  margin-left: 30px;
+  margin-bottom: 50px;
+}
+
+.bar-cases {
+  fill: rgb(221, 131, 34);
+}
+
+.bar-deaths {
+  fill: rgb(221, 34, 34);
+}
+
+.left-axis-label,
+.bottom-axis-label {
+  font-size: 30px;
+  text-transform: capitalize;
+}
+
+.left-axis-label {
+  transform: rotate(-90deg);
+}
+
+.bottom-axis-label {
+}
+
+table {
+  width: 960px;
+  border-collapse: collapse;
+  margin: auto;
+  margin-bottom: 40px;
+}
+
+td,
+th {
+  border: 1px solid #cccccc;
+  padding: 10px;
+}
+
+th {
+  font-weight: bold;
+}
