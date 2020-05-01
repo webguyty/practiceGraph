@@ -47,8 +47,13 @@ a:hover {
   color: rgb(221, 34, 34);
 }
 
+.graphDiv {
+  width: 1100px;
+  margin: auto;
+}
+
 svg {
-  margin-left: 30px;
+  /* margin-left: 30px; */
   margin-bottom: 50px;
 }
 
