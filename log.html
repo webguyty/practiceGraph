@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Practice Graph Linear</title>
+    <title>Practice Graph Log</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="https://d3js.org/d3.v5.js"></script>
   </head>
@@ -13,16 +13,16 @@
     <div class="buttons">
       <div class="dataDisplayButtons">
         <p>View Data</p>
-        <button id="cases-button">Cases</button>
-        <button id="deaths-button">Deaths</button>
+        <button id="cases-button-log">Cases</button>
+        <button id="deaths-button-log">Deaths</button>
       </div>
       <div class="dataDisplayButtons">
         <p>Graph Type</p>
-        <button id="linear-button">Linear</button>
-        <button id="log-button">Log</button>
+        <a href="./index.html"><button id="linear-button">Linear</button></a>
+        <a href="./log.html"><button id="log-button">Log</button></a>
       </div>
     </div>
-    <h1 id="graphTypeTitle"></h1>
+    <h1>Logarithmic</h1>
     <div class="graphDiv">
       <svg width="1100" height="500"></svg>
     </div>

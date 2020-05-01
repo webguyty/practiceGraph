@@ -1,6 +1,14 @@
 import { coronaData } from './coronaData.js';
 
-const renderGraphBars = (data, key) => {
+let dataState = '';
+let graphState = '';
+
+const renderGraphBars = (data, key, graphType) => {
+  //Takes 3 arguments
+  //data - array of objects you want to graph
+  //key - key of data in graph you want to graph
+  //graphType - 'linear' or 'log'
+
   // Clear out graph info
   d3.selectAll('svg > *').remove();
 
@@ -29,17 +37,27 @@ const renderGraphBars = (data, key) => {
     .range([0, innerWidth])
     .padding(0.25);
 
-  const yScale = d3
+  let yScale = d3
     .scaleLinear()
     .domain([0, d3.max(data, (d) => yValue(d)) + 10])
-    .range([innerHeight, 0]);
+    .range([innerHeight, 1]);
+
+  if (graphType === 'log') {
+    yScale = d3
+      .scaleLog()
+      .base(2)
+      .domain([1, d3.max(data, (d) => yValue(d)) + 10])
+      .range([innerHeight, 0]);
+  }
 
   const g = svg
     .append('g')
     .attr('transform', `translate(${margin.left},${margin.right})`);
 
   // Add left axis info and add title
+
   g.append('g').call(d3.axisLeft(yScale));
+
   // Title x and y position inverted due to rotation in css
   g.append('text')
     .attr('class', 'left-axis-label')
@@ -68,7 +86,12 @@ const renderGraphBars = (data, key) => {
     .attr('height', (d) => innerHeight - yScale(yValue(d)))
     .attr('class', `bar-${key}`);
 
-  console.log('shit');
+  if (graphState === 'linear') {
+    document.getElementById('graphTypeTitle').innerHTML = 'Linear graph';
+  }
+  if (graphState === 'log') {
+    document.getElementById('graphTypeTitle').innerHTML = 'Logarithmic graph';
+  }
 };
 
 const renderTable = (data) => {
@@ -82,26 +105,29 @@ const renderTable = (data) => {
   tableBody.innerHTML = dataHtml;
 };
 
-// renderGraphBars(coronaData, 'cases');
-document
-  .getElementById('deaths-button')
-  .addEventListener('click', () => renderGraphBars(coronaData, 'deaths'));
+document.getElementById('deaths-button').addEventListener('click', () => {
+  dataState = 'deaths';
+  renderGraphBars(coronaData, dataState, graphState);
+});
 
-document
-  .getElementById('cases-button')
-  .addEventListener('click', () => renderGraphBars(coronaData, 'cases'));
+document.getElementById('cases-button').addEventListener('click', () => {
+  dataState = 'cases';
+  renderGraphBars(coronaData, dataState, graphState);
+});
 
-// document.getElementById('deaths-button').addEventListener('click', function () {
-//   console.log('what the fuck');
-// });
+document.getElementById('linear-button').addEventListener('click', () => {
+  graphState = 'linear';
+  renderGraphBars(coronaData, dataState, graphState);
+});
+
+document.getElementById('log-button').addEventListener('click', () => {
+  graphState = 'log';
+  renderGraphBars(coronaData, dataState, graphState);
+});
 
 window.onload = () => {
+  dataState = 'cases';
+  graphState = 'linear';
+  renderGraphBars(coronaData, dataState, graphState);
   renderTable(coronaData);
-  renderGraphBars(coronaData, 'cases');
 };
-
-// const nd = new Date(coronaData[0].date);
-
-// console.log(nd);
-
-// console.log(d3);
