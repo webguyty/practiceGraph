@@ -27,8 +27,18 @@ const renderGraphBars = (data, key, graphType) => {
   const innerHeight = height - margin.top - margin.bottom;
 
   const formatDate = (date) => {
-    date = new Date(date);
-    return `${date.getUTCMonth() + 1}/${date.getUTCDate()}`;
+    // For Safari create date a janky way like this
+    const dateStr = `${date}T00:00:00`;
+    const d = new Date(dateStr);
+
+    const dateF = {
+      year: d.getUTCFullYear(),
+      month: d.getUTCMonth() + 1,
+      day: d.getUTCDate(),
+    };
+
+    // const dateS = ;
+    return `${dateF.month}/${dateF.day}`;
   };
 
   const xScale = d3
@@ -37,11 +47,12 @@ const renderGraphBars = (data, key, graphType) => {
     .range([0, innerWidth])
     .padding(0.25);
 
+  //Default yScale being set up for linear graph
   let yScale = d3
     .scaleLinear()
     .domain([0, d3.max(data, (d) => yValue(d)) + 10])
     .range([innerHeight, 1]);
-
+  //Reassign yScale to be log graph
   if (graphType === 'log') {
     yScale = d3
       .scaleLog()
